@@ -13,8 +13,13 @@ import ProfileSection from "@/components/ProfileSection";
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [darkMode, setDarkMode] = useState(false);
+  const [showRocket, setShowRocket] = useState(false);
 
   useEffect(() => {
+    // Rocket animation on page load
+    setTimeout(() => setShowRocket(true), 500);
+    setTimeout(() => setShowRocket(false), 3000);
+
     const handleScroll = () => {
       const sections = ["home", "about", "projects", "skills", "achievements", "contact"];
       const scrollPosition = window.scrollY + 100;
@@ -95,14 +100,21 @@ const Index = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'dark bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' : 'bg-gradient-to-br from-purple-400 via-pink-500 to-red-500'}`}>
+    <div className={`min-h-screen transition-all duration-500 custom-cursor ${darkMode ? 'dark bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' : 'bg-gradient-to-br from-purple-400 via-pink-500 to-red-500'}`}>
       <ParticleBackground />
       <Navigation activeSection={activeSection} />
+      
+      {/* Rocket Animation */}
+      {showRocket && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none">
+          <div className="text-6xl animate-rocket">🚀</div>
+        </div>
+      )}
       
       {/* Dark Mode Toggle */}
       <Button
         onClick={toggleDarkMode}
-        className="fixed top-4 right-4 z-50 p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 transition-all duration-300"
+        className="fixed top-4 right-4 z-50 p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-white/25"
         size="icon"
       >
         {darkMode ? <Sun className="h-5 w-5 text-yellow-300" /> : <Moon className="h-5 w-5 text-white" />}
@@ -116,7 +128,7 @@ const Index = () => {
             <ProfileSection />
             
             {/* Introduction */}
-            <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500 transform hover:scale-[1.02]">
+            <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-pink-500/25">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-pink-200 bg-clip-text text-transparent animate-fade-in sparkle-text">
                 Hi, I'm SANJANA PRIYA DARSHINI 👩‍💻
               </h1>
@@ -136,7 +148,7 @@ const Index = () => {
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-pink-500/25 rounded-xl"
+                  className="enhanced-button bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transform transition-all duration-300 shadow-lg rounded-xl"
                 >
                   <Mail className="mr-2 h-5 w-5" />
                   Contact Me 📧
@@ -144,7 +156,7 @@ const Index = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white/30 text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-cyan-500/25 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500"
+                  className="enhanced-button border-white/30 text-white transition-all duration-300 shadow-lg rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600"
                 >
                   <Download className="mr-2 h-5 w-5" />
                   Resume 📄
@@ -158,7 +170,7 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/25">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center animate-fade-in sparkle-text">👩‍💻 About Me</h2>
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="text-white space-y-6">
@@ -210,7 +222,7 @@ const Index = () => {
       {/* Skills Section */}
       <section id="skills" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/25">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center sparkle-text">⚙️ Skills & Technologies</h2>
             
             {/* Skill Tags */}
@@ -236,7 +248,7 @@ const Index = () => {
       {/* Achievements Section */}
       <section id="achievements" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500 hover:shadow-2xl hover:shadow-yellow-500/25">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center sparkle-text">🏆 Achievements & Certifications</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
@@ -267,7 +279,7 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/25">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 sparkle-text">📞 Let's Connect!</h2>
             <p className="text-xl text-white opacity-90 mb-8 sparkle-text">
               I'm always open to discussing new opportunities and interesting projects. 🤝
@@ -275,7 +287,7 @@ const Index = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-cyan-500/25 w-full rounded-xl"
+                className="enhanced-button bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg w-full rounded-xl"
               >
                 <Mail className="mr-2 h-5 w-5 flex-shrink-0" />
                 <span className="truncate">sanjana71006@gmail.com</span>
@@ -283,7 +295,7 @@ const Index = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white/30 text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-purple-500/25 w-full rounded-xl bg-gradient-to-r from-purple-400 to-blue-500"
+                className="enhanced-button border-white/30 text-white transition-all duration-300 shadow-lg w-full rounded-xl bg-gradient-to-r from-purple-400 to-blue-500 hover:from-purple-500 hover:to-blue-600"
               >
                 <Linkedin className="mr-2 h-5 w-5 flex-shrink-0" />
                 <span className="truncate">LinkedIn</span>
@@ -291,7 +303,7 @@ const Index = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white/30 text-white hover:bg-gradient-to-r hover:from-gray-700 hover:to-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-gray-500/25 w-full sm:col-span-2 lg:col-span-1 rounded-xl bg-gradient-to-r from-gray-600 to-gray-800"
+                className="enhanced-button border-white/30 text-white transition-all duration-300 shadow-lg w-full sm:col-span-2 lg:col-span-1 rounded-xl bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-black"
               >
                 <Github className="mr-2 h-5 w-5 flex-shrink-0" />
                 <span className="truncate">GitHub</span>
@@ -303,7 +315,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-8 text-center text-white opacity-75">
-        <p className="sparkle-text">&copy; 2024 Sanjana Priya Darshini. Built with ❤️ and React. 🚀</p>
+        <p className="sparkle-text">&copy; 2024 Sanjana Priya Darshini. Built with 💖 and React. 🚀</p>
       </footer>
     </div>
   );
