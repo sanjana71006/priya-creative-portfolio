@@ -1,15 +1,18 @@
 
 import { useEffect, useState } from "react";
-import { Mail, Github, Linkedin, Download, ExternalLink, GraduationCap, Award, Code } from "lucide-react";
+import { Mail, Github, Linkedin, Download, ExternalLink, GraduationCap, Award, Code, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import TypewriterText from "@/components/TypewriterText";
 import ProjectCard from "@/components/ProjectCard";
 import SkillTag from "@/components/SkillTag";
 import Navigation from "@/components/Navigation";
+import ParticleBackground from "@/components/ParticleBackground";
+import SkillProgressBar from "@/components/SkillProgressBar";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +36,11 @@ const Index = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle('dark');
+  };
 
   const projects = [
     {
@@ -79,6 +87,27 @@ const Index = () => {
     }
   ];
 
+  const skillCategories = {
+    "Programming": [
+      { name: "Python", level: 90 },
+      { name: "JavaScript", level: 85 },
+      { name: "Java", level: 80 },
+      { name: "C", level: 75 }
+    ],
+    "Frameworks": [
+      { name: "React", level: 85 },
+      { name: "Node.js", level: 80 },
+      { name: "Tailwind CSS", level: 90 },
+      { name: "Firebase", level: 75 }
+    ],
+    "Tools": [
+      { name: "Git", level: 85 },
+      { name: "OpenCV", level: 80 },
+      { name: "TensorFlow", level: 75 },
+      { name: "Docker", level: 70 }
+    ]
+  };
+
   const skills = {
     "Programming": ["C", "Java", "Python", "JavaScript", "HTML", "CSS"],
     "Frameworks": ["React", "Node.js", "Tailwind CSS", "Firebase"],
@@ -87,14 +116,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
+    <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'dark bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' : 'bg-gradient-to-br from-purple-400 via-pink-500 to-red-500'}`}>
+      <ParticleBackground />
       <Navigation activeSection={activeSection} />
+      
+      {/* Dark Mode Toggle */}
+      <Button
+        onClick={toggleDarkMode}
+        className="fixed top-4 right-4 z-50 p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 transition-all duration-300"
+        size="icon"
+      >
+        {darkMode ? <Sun className="h-5 w-5 text-yellow-300" /> : <Moon className="h-5 w-5 text-white" />}
+      </Button>
       
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-20">
         <div className="text-center text-white max-w-4xl mx-auto">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-pink-200 bg-clip-text text-transparent">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500 transform hover:scale-[1.02]">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-pink-200 bg-clip-text text-transparent animate-fade-in">
               Hi, I'm SANJANA PRIYA DARSHINI
             </h1>
             <div className="text-xl md:text-2xl mb-6 h-16">
@@ -107,24 +146,24 @@ const Index = () => {
                 ]}
               />
             </div>
-            <p className="text-lg md:text-xl mb-8 opacity-90">
+            <p className="text-lg md:text-xl mb-8 opacity-90 animate-fade-in" style={{ animationDelay: '0.5s' }}>
               I love building meaningful digital experiences through clean code and smart design.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <Mail className="mr-2 h-5 w-5" />
-                Get In Touch
+                Contact Me
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <Download className="mr-2 h-5 w-5" />
-                Download Resume
+                Resume
               </Button>
             </div>
           </div>
@@ -134,23 +173,23 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">About Me</h2>
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center animate-fade-in">About Me</h2>
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="text-white space-y-6">
-                <p className="text-lg opacity-90">
+                <p className="text-lg opacity-90 transform translate-y-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                   I'm a passionate B.Tech Computer Science and Engineering student at Vignan's University. 
                   I enjoy turning ideas into reality through programming and design.
                 </p>
-                <p className="text-lg opacity-90">
+                <p className="text-lg opacity-90 transform translate-y-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
                   I'm currently exploring web development, AI, machine learning, and UI/UX design. 
                   I love collaborating on projects that challenge my thinking.
                 </p>
-                <p className="text-lg opacity-90">
+                <p className="text-lg opacity-90 transform translate-y-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
                   My goal is to grow into a role where I can contribute to impactful, real-world solutions.
                 </p>
               </div>
-              <Card className="backdrop-blur-md bg-white/10 border-white/20">
+              <Card className="backdrop-blur-md bg-white/10 border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-105">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <GraduationCap className="h-8 w-8 text-pink-300 mr-3" />
@@ -174,7 +213,7 @@ const Index = () => {
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Featured Projects</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center animate-fade-in">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <ProjectCard key={index} project={project} index={index} />
@@ -186,8 +225,28 @@ const Index = () => {
       {/* Skills Section */}
       <section id="skills" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Skills & Technologies</h2>
+            
+            {/* Animated Progress Bars */}
+            <div className="mb-12">
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                <Code className="h-5 w-5 mr-2 text-pink-300" />
+                Proficiency Levels
+              </h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                {Object.entries(skillCategories).map(([category, categorySkills]) => (
+                  <div key={category} className="space-y-4">
+                    <h4 className="text-lg font-medium text-pink-200">{category}</h4>
+                    {categorySkills.map((skill, index) => (
+                      <SkillProgressBar key={index} skill={skill.name} level={skill.level} delay={index * 0.2} />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Skill Tags */}
             <div className="space-y-8">
               {Object.entries(skills).map(([category, skillList]) => (
                 <div key={category}>
@@ -210,7 +269,7 @@ const Index = () => {
       {/* Achievements Section */}
       <section id="achievements" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Achievements & Certifications</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
@@ -221,12 +280,12 @@ const Index = () => {
                 { title: "Video Editing Recognition", description: "Two certificates for motivational and TED talk video batches" },
                 { title: "Code Fiesta Participant", description: "Active participation in coding competitions" }
               ].map((achievement, index) => (
-                <Card key={index} className="backdrop-blur-md bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                <Card key={index} className="backdrop-blur-md bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 group">
                   <CardContent className="p-6">
                     <div className="flex items-start">
-                      <Award className="h-6 w-6 text-yellow-400 mr-3 mt-1 flex-shrink-0" />
+                      <Award className="h-6 w-6 text-yellow-400 mr-3 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                       <div>
-                        <h3 className="text-lg font-semibold text-white mb-2">{achievement.title}</h3>
+                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-pink-300 transition-colors duration-300">{achievement.title}</h3>
                         <p className="text-pink-200 opacity-90">{achievement.description}</p>
                       </div>
                     </div>
@@ -241,34 +300,34 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Let's Connect!</h2>
             <p className="text-xl text-white opacity-90 mb-8">
               I'm always open to discussing new opportunities and interesting projects.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300"
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
-                <Mail className="mr-2 h-5 w-5" />
-                sanjana71006@gmail.com
+                <Mail className="mr-2 h-5 w-5 flex-shrink-0" />
+                <span className="truncate">sanjana71006@gmail.com</span>
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
-                <Linkedin className="mr-2 h-5 w-5" />
-                LinkedIn
+                <Linkedin className="mr-2 h-5 w-5 flex-shrink-0" />
+                <span className="truncate">LinkedIn</span>
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:col-span-2 lg:col-span-1"
               >
-                <Github className="mr-2 h-5 w-5" />
-                GitHub
+                <Github className="mr-2 h-5 w-5 flex-shrink-0" />
+                <span className="truncate">GitHub</span>
               </Button>
             </div>
           </div>
