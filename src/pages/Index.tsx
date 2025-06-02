@@ -1,12 +1,284 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect, useState } from "react";
+import { Mail, Github, Linkedin, Download, ExternalLink, GraduationCap, Award, Code } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import TypewriterText from "@/components/TypewriterText";
+import ProjectCard from "@/components/ProjectCard";
+import SkillTag from "@/components/SkillTag";
+import Navigation from "@/components/Navigation";
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["home", "about", "projects", "skills", "achievements", "contact"];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const projects = [
+    {
+      title: "VisionFeel",
+      description: "AI-powered web app that combines object detection (using YOLO and OpenCV) and sentiment analysis to analyze uploaded images and generate detailed emotional and visual insights.",
+      tech: ["Python", "Flask", "OpenCV", "YOLOv5", "Hugging Face"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Mind2Image",
+      description: "A generative AI project that uses Stable Diffusion and Transformers to turn creative text prompts into stunning AI-generated images.",
+      tech: ["Python", "Hugging Face", "Transformers", "Diffusers"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Chatterly",
+      description: "A chatbot app integrating Anthropic Claude and Google Gemini APIs with conversational graph building and real-time NLP visualization.",
+      tech: ["Python", "Langchain", "Graphviz", "Jupyter"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Vid2TextQ-A",
+      description: "Extracts text from video frames using OCR and answers questions based on content using NLP. Enables smart video Q&A functionality.",
+      tech: ["Python", "OpenCV", "Tesseract", "Transformers"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Voice Calculator",
+      description: "A voice-controlled calculator built in Python that converts speech input into text and performs arithmetic operations.",
+      tech: ["Python", "SpeechRecognition", "pyttsx3"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Kidney Disease Prediction",
+      description: "Machine learning model to predict chronic kidney disease using patient medical data and biomarker analysis.",
+      tech: ["Python", "Pandas", "Scikit-learn"],
+      github: "#",
+      demo: "#"
+    }
+  ];
+
+  const skills = {
+    "Programming": ["C", "Java", "Python", "JavaScript", "HTML", "CSS"],
+    "Frameworks": ["React", "Node.js", "Tailwind CSS", "Firebase"],
+    "Tools": ["Git", "GitHub", "OpenCV", "TensorFlow"],
+    "Soft Skills": ["Communication", "Teamwork", "Critical Thinking", "Time Management"]
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
+      <Navigation activeSection={activeSection} />
+      
+      {/* Hero Section */}
+      <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-20">
+        <div className="text-center text-white max-w-4xl mx-auto">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-pink-200 bg-clip-text text-transparent">
+              Hi, I'm SANJANA PRIYA DARSHINI
+            </h1>
+            <div className="text-xl md:text-2xl mb-6 h-16">
+              <TypewriterText 
+                texts={[
+                  "Aspiring Software Developer",
+                  "Passionate Learner",
+                  "Creative Thinker",
+                  "AI Enthusiast"
+                ]}
+              />
+            </div>
+            <p className="text-lg md:text-xl mb-8 opacity-90">
+              I love building meaningful digital experiences through clean code and smart design.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300"
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                Get In Touch
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download Resume
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">About Me</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="text-white space-y-6">
+                <p className="text-lg opacity-90">
+                  I'm a passionate B.Tech Computer Science and Engineering student at Vignan's University. 
+                  I enjoy turning ideas into reality through programming and design.
+                </p>
+                <p className="text-lg opacity-90">
+                  I'm currently exploring web development, AI, machine learning, and UI/UX design. 
+                  I love collaborating on projects that challenge my thinking.
+                </p>
+                <p className="text-lg opacity-90">
+                  My goal is to grow into a role where I can contribute to impactful, real-world solutions.
+                </p>
+              </div>
+              <Card className="backdrop-blur-md bg-white/10 border-white/20">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <GraduationCap className="h-8 w-8 text-pink-300 mr-3" />
+                    <div>
+                      <h3 className="text-xl font-semibold text-white">Education</h3>
+                      <p className="text-pink-200">B.Tech in CSE</p>
+                    </div>
+                  </div>
+                  <p className="text-white opacity-90 mb-2">
+                    Vignan's Foundation for Science, Technology & Research
+                  </p>
+                  <p className="text-pink-200 mb-2">2023 – 2027</p>
+                  <p className="text-white font-semibold">CGPA: 9.06</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Featured Projects</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <ProjectCard key={index} project={project} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Skills & Technologies</h2>
+            <div className="space-y-8">
+              {Object.entries(skills).map(([category, skillList]) => (
+                <div key={category}>
+                  <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                    <Code className="h-5 w-5 mr-2 text-pink-300" />
+                    {category}
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {skillList.map((skill, index) => (
+                      <SkillTag key={index} skill={skill} index={index} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements Section */}
+      <section id="achievements" className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Achievements & Certifications</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { title: "1st Place Hackathon", description: "EduBot project at VFSTR associated with byteXL" },
+                { title: "3rd Prize CIS' SOIREE SCINTILLA", description: "Technical competition at RVR and JC College" },
+                { title: "Cambridge English PET Certification", description: "B1 Level English Proficiency" },
+                { title: "NPTEL Elite Certification", description: "Principles of Management & Joy of Computing using Python" },
+                { title: "Video Editing Recognition", description: "Two certificates for motivational and TED talk video batches" },
+                { title: "Code Fiesta Participant", description: "Active participation in coding competitions" }
+              ].map((achievement, index) => (
+                <Card key={index} className="backdrop-blur-md bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                  <CardContent className="p-6">
+                    <div className="flex items-start">
+                      <Award className="h-6 w-6 text-yellow-400 mr-3 mt-1 flex-shrink-0" />
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">{achievement.title}</h3>
+                        <p className="text-pink-200 opacity-90">{achievement.description}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Let's Connect!</h2>
+            <p className="text-xl text-white opacity-90 mb-8">
+              I'm always open to discussing new opportunities and interesting projects.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300"
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                sanjana71006@gmail.com
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+              >
+                <Linkedin className="mr-2 h-5 w-5" />
+                LinkedIn
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+              >
+                <Github className="mr-2 h-5 w-5" />
+                GitHub
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 text-center text-white opacity-75">
+        <p>&copy; 2024 Sanjana Priya Darshini. Built with ❤️ and React.</p>
+      </footer>
     </div>
   );
 };
