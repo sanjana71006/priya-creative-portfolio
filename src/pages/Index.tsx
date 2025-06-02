@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Mail, Github, Linkedin, Download, ExternalLink, GraduationCap, Award, Code, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,6 @@ import ProjectCard from "@/components/ProjectCard";
 import SkillTag from "@/components/SkillTag";
 import Navigation from "@/components/Navigation";
 import ParticleBackground from "@/components/ParticleBackground";
-import SkillProgressBar from "@/components/SkillProgressBar";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -86,27 +84,6 @@ const Index = () => {
       demo: "#"
     }
   ];
-
-  const skillCategories = {
-    "Programming": [
-      { name: "Python", level: 90 },
-      { name: "JavaScript", level: 85 },
-      { name: "Java", level: 80 },
-      { name: "C", level: 75 }
-    ],
-    "Frameworks": [
-      { name: "React", level: 85 },
-      { name: "Node.js", level: 80 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "Firebase", level: 75 }
-    ],
-    "Tools": [
-      { name: "Git", level: 85 },
-      { name: "OpenCV", level: 80 },
-      { name: "TensorFlow", level: 75 },
-      { name: "Docker", level: 70 }
-    ]
-  };
 
   const skills = {
     "Programming": ["C", "Java", "Python", "JavaScript", "HTML", "CSS"],
@@ -228,24 +205,6 @@ const Index = () => {
           <div className="backdrop-blur-md bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Skills & Technologies</h2>
             
-            {/* Animated Progress Bars */}
-            <div className="mb-12">
-              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
-                <Code className="h-5 w-5 mr-2 text-pink-300" />
-                Proficiency Levels
-              </h3>
-              <div className="grid md:grid-cols-3 gap-8">
-                {Object.entries(skillCategories).map(([category, categorySkills]) => (
-                  <div key={category} className="space-y-4">
-                    <h4 className="text-lg font-medium text-pink-200">{category}</h4>
-                    {categorySkills.map((skill, index) => (
-                      <SkillProgressBar key={index} skill={skill.name} level={skill.level} delay={index * 0.2} />
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Skill Tags */}
             <div className="space-y-8">
               {Object.entries(skills).map(([category, skillList]) => (
