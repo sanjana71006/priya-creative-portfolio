@@ -19,7 +19,7 @@ const ProfileSection = () => {
         <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/30 backdrop-blur-md bg-white/10 shadow-2xl transform hover:scale-105 transition-all duration-500 glow-border">
           {!imageError ? (
             <img
-              src="/placeholder.svg"
+              src="mypic.jpg"
               alt="Sanjana Priya Darshini"
               className="w-full h-full object-cover"
               onError={() => setImageError(true)}

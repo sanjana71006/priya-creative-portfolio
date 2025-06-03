@@ -52,42 +52,42 @@ const Index = () => {
       title: "🔍 VisionFeel",
       description: "AI-powered web app that combines object detection (using YOLO and OpenCV) and sentiment analysis to analyze uploaded images and generate detailed emotional and visual insights.",
       tech: ["Python", "Flask", "OpenCV", "YOLOv5", "Hugging Face"],
-      github: "#",
+      github: "https://github.com/sanjana71006/VisionFeel",
       demo: "#"
     },
     {
       title: "🧠 Mind2Image",
       description: "A generative AI project that uses Stable Diffusion and Transformers to turn creative text prompts into stunning AI-generated images.",
       tech: ["Python", "Hugging Face", "Transformers", "Diffusers"],
-      github: "#",
+      github: "https://github.com/sanjana71006/Mind2Image",
       demo: "#"
     },
     {
       title: "🗣️ Chatterly",
       description: "A chatbot app integrating Anthropic Claude and Google Gemini APIs with conversational graph building and real-time NLP visualization.",
       tech: ["Python", "Langchain", "Graphviz", "Jupyter"],
-      github: "#",
+      github: "https://github.com/sanjana71006/Chatterly",
       demo: "#"
     },
     {
       title: "📽️ Vid2TextQ-A",
       description: "Extracts text from video frames using OCR and answers questions based on content using NLP. Enables smart video Q&A functionality.",
       tech: ["Python", "OpenCV", "Tesseract", "Transformers"],
-      github: "#",
+      github: "https://github.com/sanjana71006/Vid2TextQ-A-",
       demo: "#"
     },
     {
       title: "🧮 Voice Calculator",
       description: "A voice-controlled calculator built in Python that converts speech input into text and performs arithmetic operations.",
       tech: ["Python", "SpeechRecognition", "pyttsx3"],
-      github: "#",
+      github: "https://github.com/sanjana71006/Voice-calculator",
       demo: "#"
     },
     {
       title: "🧬 Kidney Disease Prediction",
       description: "Machine learning model to predict chronic kidney disease using patient medical data and biomarker analysis.",
       tech: ["Python", "Pandas", "Scikit-learn"],
-      github: "#",
+      github: "https://github.com/sanjana71006/kidney-chronic-disease-prediction",
       demo: "#"
     }
   ];
